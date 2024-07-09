@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# Sistema de Controle de Usuários
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descrição do Sistema
+Este sistema gerencia diferentes tipos de usuários com permissões específicas para operações CRUD (Create, Read, Update, Delete) em uma plataforma web.
 
-## Available Scripts
+## Tipos de Usuários e Permissões
 
-In the project directory, you can run:
+### 1. Usuário Tipo 1 (Leitura)
+- **Permissões**:
+  - Listar usuários
 
-### `npm start`
+### 2. Usuário Tipo 2 (Leitura)
+- **Permissões**:
+  - Listar usuários
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 3. Usuário Tipo 3 (Criação)
+- **Permissões**:
+  - Criar novos usuários
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 4. Usuário Tipo 4 (Edição e Exclusão)
+- **Permissões**:
+  - Editar usuários
+  - Excluir usuários
 
-### `npm test`
+### 5. Usuário Tipo 5 (Edição e Exclusão)
+- **Permissões**:
+  - Editar usuários
+  - Excluir usuários
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Rotas HTTP
 
-### `npm run build`
+### GET `/usuarios/:id`
+- **Descrição**: Retorna os detalhes do usuário com o ID especificado.
+- **Parâmetros**: `id` - ID único do usuário.
+- **Permissões Necessárias**: Todos os tipos de usuários podem acessar esta rota para visualizar detalhes de usuários específicos.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### POST `/usuarios`
+- **Descrição**: Cria um novo usuário com base nos dados fornecidos.
+- **Corpo da Requisição**: Dados do novo usuário a serem criados.
+- **Permissões Necessárias**: Apenas o Usuário Tipo 3 pode criar novos usuários.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### PUT `/usuarios/:id`
+- **Descrição**: Atualiza os dados de um usuário existente com o ID especificado.
+- **Parâmetros**: `id` - ID único do usuário a ser atualizado.
+- **Permissões Necessárias**: Apenas os Usuários Tipos 4 e 5 podem editar usuários.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### DELETE `/usuarios/:id`
+- **Descrição**: Exclui o usuário com o ID especificado do sistema.
+- **Parâmetros**: `id` - ID único do usuário a ser excluído.
+- **Permissões Necessárias**: Apenas os Usuários Tipos 4 e 5 podem excluir usuários.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Exemplo de Uso
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Requisição GET:
+- GET http://localhost:3333/usuarios/123
+Retorna os detalhes do usuário com ID `123`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Requisição POST:
+- POST http://localhost:3333/usuarios
+{
+"nome": "Teste",
+"email": "teste@example.com",
+"level": "1 | 2 | 3 | 4 | 5",
+"password: "12345"
+}
+Cria um novo usuário com os dados fornecidos.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Requisição PUT:
+PUT http://localhost:3333/usuarios/123
+{
+"cargo": "Analista de Sistemas"
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Atualiza o cargo do usuário com ID `123`.
+
+
+### Requisição DELETE:
+DELETE http://localhost:3333/usuarios/123
+
+Exclui o usuário com ID `123`.
