@@ -1,5 +1,9 @@
 # Sistema de Controle de Usuários
 
+# Instrução de inicialização
+- Yarn Start
+- Yarn Mock
+
 ## Descrição do Sistema
 Este sistema gerencia diferentes tipos de usuários com permissões específicas para operações CRUD (Create, Read, Update, Delete) em uma plataforma web.
 
