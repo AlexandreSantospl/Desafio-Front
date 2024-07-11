@@ -1,7 +1,8 @@
-import { Box, Button, Paper, Table, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Icon, Paper, Table, TableCell, TableContainer, TableHead, TableRow, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { ModalCreate } from "../modal-create/ModalCreate";
 import { useNavigate } from "react-router-dom";
 import { useUsuarioLogado } from "../../context/UsuarioLogadoContext";
+import { useDrawerContext } from "../../context";
 
 interface IMenuHorizontal {
     userName?: string;
@@ -15,6 +16,12 @@ interface IMenuHorizontal {
 }
 
 export const MenuHorizontal: React.FC<IMenuHorizontal> = ({ maxWidth = 1500, dialog = false, user = false, onClick, to }) => {
+
+    const theme = useTheme();
+
+    const mdDown = useMediaQuery(theme.breakpoints.down('md'))
+
+    const { toggleDrawerOpen } = useDrawerContext()
 
     const navigate = useNavigate();
 
@@ -38,7 +45,8 @@ export const MenuHorizontal: React.FC<IMenuHorizontal> = ({ maxWidth = 1500, dia
                     <Table sx={{ minWidth: 650, height: "80px" }} aria-label="simple table">
                         <TableHead >
                             <TableRow >
-                                <TableCell sx={{ paddingLeft: '54px' }} align="left">{user ? <Typography variant="h5">Usuários</Typography> : <Typography variant="h5">{loggedUser?.name}</Typography>}</TableCell>
+                                <TableCell sx={{width: "10px"}}><Button onClick={toggleDrawerOpen}><Icon>menu</Icon></Button></TableCell>
+                                <TableCell sx={{paddingLeft: mdDown? '100px' : '320px'}} align="center">{user ? <Typography variant="h5">Usuários</Typography> : <Typography variant="h5">{loggedUser?.name}</Typography>}</TableCell>
                                 <TableCell sx={{ paddingRight: '125px' }} align="right">{dialog ? <ModalCreate /> : <Button variant="contained" type="button" onClick={handleClick} sx={{ bgcolor: '#006400', marginRight: '10px' }}>Voltar para tabela</Button>}</TableCell>
                             </TableRow>
                         </TableHead>

@@ -5,6 +5,7 @@ import { IUsuario, usuariosService } from "../../shared/services/api/usuarios/Us
 import { ApiException } from "../../shared/services/api/ApiException"
 import { ModalUpdate } from "../../shared/components/modal-update/ModalUpdate"
 import { useUsuarioLogado } from "../../shared/context/UsuarioLogadoContext"
+import { MenuLateral } from "../../shared/components/menu-lateral/MenuLateral"
 
 export const ListagemDeUsuario = () => {
 
@@ -52,55 +53,57 @@ export const ListagemDeUsuario = () => {
 
 
     return (
-        <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection='column'
-            minHeight="85vh"
-            p={6}
-            sx={{ bgcolor: "#f6f6f6" }}
-        >
+        <>
+            <MenuLateral />
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                flexDirection='column'
+                minHeight="85vh"
+                p={6}
+                sx={{ bgcolor: "#f6f6f6" }}
+            >
 
-            <MenuHorizontal dialog to="#" user />
-
-            <TableContainer component={Paper} sx={{ maxWidth: 1500 }}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead sx={{ bgcolor: "#f6f6f6" }}>
-                        <TableRow>
-                            <TableCell align="left">Nome</TableCell>
-                            <TableCell align="center">Email</TableCell>
-                            <TableCell align="center">Nivel de Acesso</TableCell>
-                            <TableCell align="center">Ações</TableCell>
-                        </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-
-                        {rows.map((user) => (
-                            <TableRow key={user.id}>
-                                <TableCell align="left">{user.name}</TableCell>
-                                <TableCell align="center">{user.email}</TableCell>
-                                <TableCell align="center">{user.level}</TableCell>
-                                <TableCell align="center">
-                                    <Button onClick={() => { handleUpdate(user.id) }} sx={{ height: "30px", width: "10px" }}>
-                                        <Icon sx={{ color: '#006400' }}>create</Icon>
-                                    </Button>
-                                    <Button sx={{ height: "30px", width: "10px" }}>
-                                        <Icon onClick={() => { handleDelete(user.id) }} sx={{ color: 'red' }}>delete</Icon>
-                                    </Button>
-                                </TableCell>
+                <MenuHorizontal dialog to="#" user />
+                
+                <TableContainer component={Paper} sx={{ maxWidth: 1500 }}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead sx={{ bgcolor: "#f6f6f6" }}>
+                            <TableRow>
+                                <TableCell align="left">Nome</TableCell>
+                                <TableCell align="center">Email</TableCell>
+                                <TableCell align="center">Nivel de Acesso</TableCell>
+                                <TableCell align="center">Ações</TableCell>
                             </TableRow>
-                        ))}
+                        </TableHead>
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        <TableBody>
 
-            {selectedUserId !== null && (
-                <ModalUpdate userId={selectedUserId} onClose={handleCloseModal} to="/usuario" />
-            )}
-        </Box>
+                            {rows.map((user) => (
+                                <TableRow key={user.id}>
+                                    <TableCell align="left">{user.name}</TableCell>
+                                    <TableCell align="center">{user.email}</TableCell>
+                                    <TableCell align="center">{user.level}</TableCell>
+                                    <TableCell align="center">
+                                        <Button onClick={() => { handleUpdate(user.id) }} sx={{ height: "30px", width: "10px" }}>
+                                            <Icon sx={{ color: '#006400' }}>create</Icon>
+                                        </Button>
+                                        <Button sx={{ height: "30px", width: "10px" }}>
+                                            <Icon onClick={() => { handleDelete(user.id) }} sx={{ color: 'red' }}>delete</Icon>
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
 
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+                {selectedUserId !== null && (
+                    <ModalUpdate userId={selectedUserId} onClose={handleCloseModal} to="/usuario" />
+                )}
+            </Box>
+        </>
     )
 }

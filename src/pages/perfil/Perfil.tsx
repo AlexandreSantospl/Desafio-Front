@@ -1,31 +1,16 @@
 import { Box, Paper, Table, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import { MenuHorizontal } from "../../shared/components"
 import { InfoUser } from "../../shared/components/botoes/InfoUser"
-import { useEffect, useState } from "react"
-import { IUsuario, usuariosService } from "../../shared/services/api/usuarios/UsuariosService"
-import { useParams } from "react-router-dom"
-import { ApiException } from "../../shared/services/api/ApiException"
+import { useState } from "react"
 import { MenuLateral } from "../../shared/components/menu-lateral/MenuLateral"
+import { useUsuarioLogado } from "../../shared/context"
 
-export const InformacaoDeUsuario = () => {
+export const Perfil = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [jokey, setJokey] = useState('')
-    const [user, setUser] = useState<IUsuario | null>(null)
 
-    const { id } = useParams<{ id: string }>();
-
-    const userId = Number(id)
-
-    useEffect(() => {
-        usuariosService.getById(userId).then((result) => {
-            if (result instanceof ApiException) {
-                alert(result.message);
-            } else {
-                setUser(result);
-            }
-        })
-    }, [userId]);
+    const { user: loggedUser } = useUsuarioLogado();
 
     return (
         <>
@@ -49,12 +34,12 @@ export const InformacaoDeUsuario = () => {
                     <Table sx={{ minWidth: 650, height: "70vh", marginTop: "-40px" }} aria-label="simple table">
                         <TableHead>
                             <TableRow sx={{ display: 'flex', flexWrap: 'wrap', gap: 7, m: 5 }}>
-                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Nome" name={user?.name} onChange={setJokey} /></TableCell>
-                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Email" name={user?.email} onChange={setJokey} /></TableCell>
-                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Nivel de Acesso" name={String(user?.level)} onChange={setJokey} /></TableCell>
+                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Nome" name={loggedUser?.name} onChange={setJokey} /></TableCell>
+                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Email" name={loggedUser?.email} onChange={setJokey} /></TableCell>
+                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Nivel de Acesso" name={String(loggedUser?.level)} onChange={setJokey} /></TableCell>
                                 <TableCell align="left" sx={{ border: 'none', height: '1px' }}><InfoUser type="hidden" noTypography noTextfield onChange={setJokey} /></TableCell>
-                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Senha" name={user?.password} onChange={setJokey} /></TableCell>
-                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Confirmar senha" name={user?.password} onChange={setJokey} /></TableCell>
+                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Senha" name={loggedUser?.password} onChange={setJokey} /></TableCell>
+                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Confirmar senha" name={loggedUser?.password} onChange={setJokey} /></TableCell>
                             </TableRow>
                         </TableHead>
                     </Table>

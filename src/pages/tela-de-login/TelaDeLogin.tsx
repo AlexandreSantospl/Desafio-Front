@@ -45,7 +45,7 @@ export const TelaDeLogin = () => {
         <>
             <Box bgcolor='#006400' sx={{
                 backgroundImage: "url(https://i.pinimg.com/originals/d4/7f/6a/d47f6abfb83674d9bdd89d3a647adbd8.png)",
-                
+
                 width: "100%"
             }}>
                 <Box sx={{
@@ -87,6 +87,7 @@ export const TelaDeLogin = () => {
                     </form>
                 </Box >
             </Box>
+
         </>
     );
 }
