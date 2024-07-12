@@ -7,6 +7,7 @@ export interface IUsuario {
     email: string;
     password: string;
     level: number;
+    img?: string;
 }
 
 function gerarIdAleatorio(): string {

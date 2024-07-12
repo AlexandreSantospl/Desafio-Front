@@ -29,7 +29,7 @@ interface IInputDialogUptadeProps {
 export const InputDialog = React.forwardRef<HTMLInputElement, IInputDialogUptadeProps>((props, ref) => {
 
     return (
-        <DialogContent>
+        <DialogContent  sx={{marginTop: "-20px"}}>
             <Typography>{props.label}</Typography>
             <TextField
                 margin="dense"
@@ -57,6 +57,8 @@ export const ModalUpdate: React.FC<ModalUpdateProps> = ({ onClose, userId, to, o
     const [password2, setPassword2] = useState('');
     const [level, setLevel] = useState(1);
     const [user, setUser] = useState<IUsuario | null>(null)
+    const [img, setImg] = useState('');
+
 
     useEffect(() => {
         usuariosService.getById(userId).then((result) => {
@@ -77,7 +79,7 @@ export const ModalUpdate: React.FC<ModalUpdateProps> = ({ onClose, userId, to, o
         if (email.length < 5) return alert("O email é invalido.")
         if (password !== password2) return alert("As senhas são diferentes.")
         if (level === 1 || level === 2 || level === 3 || level === 4 || level === 5) {
-            const newUsuario: IUsuario = { id: userId, email: email, name: name, password: password, level: level }
+            const newUsuario: IUsuario = { id: userId, email: email, name: name, password: password, level: level, img: img }
             if (user) {
                 usuariosService.updateById(userId, newUsuario).then((result) => {
                     if (result instanceof ApiException) {
@@ -94,8 +96,6 @@ export const ModalUpdate: React.FC<ModalUpdateProps> = ({ onClose, userId, to, o
             return alert('Nivel Invalido')
         }
     };
-
-
 
 
     if (!user) return null;
@@ -119,7 +119,7 @@ export const ModalUpdate: React.FC<ModalUpdateProps> = ({ onClose, userId, to, o
                     },
                 }}
             >
-                <Box display='flex' gap={40} sx={{ width: "60vh" }}>
+                <Box display='flex' gap={40} sx={{ width: "61vh" }}>
                     <DialogTitle>Editar usuário</DialogTitle>
                     <Button onClick={handleClose}><Icon sx={{ color: 'black' }}>close</Icon></Button>
                 </Box>
@@ -132,6 +132,8 @@ export const ModalUpdate: React.FC<ModalUpdateProps> = ({ onClose, userId, to, o
                 <InputDialog label="Senha" name={user.password} type="text" value={password} onChange={newValue => setPassword(newValue)} />
 
                 <InputDialog label="Confirmar senha" name={user.password} type="text" value={password2} onChange={newValue => setPassword2(newValue)} />
+
+                <InputDialog label="Imagem (Opcional)" name="img" type="string" value={img} onChange={newValue => setImg(newValue)} />
 
                 <DialogActions>
                     <Button variant="contained" type="submit" onClick={handleSave} sx={{ bgcolor: '#006400', m: 2 }}>Editar</Button>

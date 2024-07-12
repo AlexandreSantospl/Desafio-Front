@@ -52,7 +52,7 @@ export const InformacaoDeUsuario = () => {
                                 <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Nome" name={user?.name} onChange={setJokey} /></TableCell>
                                 <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Email" name={user?.email} onChange={setJokey} /></TableCell>
                                 <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Nivel de Acesso" name={String(user?.level)} onChange={setJokey} /></TableCell>
-                                <TableCell align="left" sx={{ border: 'none', height: '1px' }}><InfoUser type="hidden" noTypography noTextfield onChange={setJokey} /></TableCell>
+                                <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Foto de Perfil" name={user?.img} onChange={setJokey} /></TableCell>
                                 <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Senha" name={user?.password} onChange={setJokey} /></TableCell>
                                 <TableCell align="left" sx={{ border: 'none' }}><InfoUser type="text" label="Confirmar senha" name={user?.password} onChange={setJokey} /></TableCell>
                             </TableRow>

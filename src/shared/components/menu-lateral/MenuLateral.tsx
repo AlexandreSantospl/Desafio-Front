@@ -8,7 +8,7 @@ export interface IListItemLinkProps {
     icon?: string;
     to: string;
     onClick?: (() => void) | undefined;
-    
+
 }
 
 export const ListItemLink: React.FC<IListItemLinkProps> = ({ to, icon, label, onClick }) => {
@@ -34,14 +34,14 @@ export const ListItemLink: React.FC<IListItemLinkProps> = ({ to, icon, label, on
     )
 }
 
-export const MenuLateral: React.FC<{ show?: boolean}> = () => {
+export const MenuLateral: React.FC<{ show?: boolean }> = () => {
 
     const { user: loggedUser } = useUsuarioLogado();
 
     const theme = useTheme();
 
     const smDown = useMediaQuery(theme.breakpoints.down('sm'))
-    
+
     const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext();
 
     return (
@@ -51,7 +51,7 @@ export const MenuLateral: React.FC<{ show?: boolean}> = () => {
 
 
                     <Box width="100%" height={theme.spacing(20)} display="flex" justifyContent="center" alignItems="center">
-                        <Avatar sx={{ height: theme.spacing(12), width: theme.spacing(12) }} src="https://media-gru2-1.cdn.whatsapp.net/v/t61.24694-24/436363297_818210166907305_1542087175055048044_n.jpg?ccb=11-4&oh=01_Q5AaINBaYiI96uR69NAOTCpiPZAF-KzM-EdpmUmFn-4_Qa5P&oe=6693E450&_nc_sid=e6ed6c&_nc_cat=109" />
+                        <Avatar sx={{ height: theme.spacing(12), width: theme.spacing(12) }} src={loggedUser?.img} />
                     </Box>
 
                     <Divider />
@@ -75,6 +75,10 @@ export const MenuLateral: React.FC<{ show?: boolean}> = () => {
                                     onClick={smDown ? toggleDrawerOpen : undefined} />
                             ))}
                         </List>
+                    </Box>
+
+                    <Box>
+                        <ListItemLink to="/login" icon="logout" label="Logout"/>
                     </Box>
 
                 </Box>

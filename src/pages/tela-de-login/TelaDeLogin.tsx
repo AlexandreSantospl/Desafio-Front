@@ -7,17 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { useUsuarioLogado } from "../../shared/context/UsuarioLogadoContext";
 import { ApiException } from "../../shared/services/api/ApiException";
 
-
 export const TelaDeLogin = () => {
-
-    const inputPasswordRef = useRef<HTMLInputElement>(null);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+    const navigate = useNavigate();
+    
     const { setUser } = useUsuarioLogado();
-
-    const history = useNavigate();
-
+    
     const handleEntrar = useCallback(async () => {
         try {
             const userLogado = await usuariosService.login(email, password);
@@ -26,21 +24,23 @@ export const TelaDeLogin = () => {
             } else {
                 console.log('Usuário logado:', userLogado.name);
                 setUser(userLogado);
-                history('/listagem');
+                navigate('/listagem');
             }
         } catch (error) {
             console.error('Erro ao fazer login:', error);
         }
-    }, [email, password, history, setUser]);
+    }, [email, password, navigate, setUser]);
 
     const theme = useTheme();
-
+    
     const smDown = useMediaQuery(theme.breakpoints.down('sm'))
-
+    
     const mdDown = useMediaQuery(theme.breakpoints.down('md'))
-
+    
     const lgDown = useMediaQuery(theme.breakpoints.down('lg'))
-
+    
+    const inputPasswordRef = useRef<HTMLInputElement>(null);
+    
     return (
         <>
             <Box bgcolor='#006400' sx={{

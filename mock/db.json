@@ -5,7 +5,8 @@
       "email": "teste1@gmail.com",
       "name": "Teste1",
       "password": "12345",
-      "level": 1
+      "level": 1,
+      "img": "https://i.pinimg.com/236x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"
     },
     {
       "id": "2",
@@ -26,14 +27,16 @@
       "email": "teste4@gmail.com",
       "name": "Teste4",
       "password": "12345",
-      "level": 4
+      "level": 4,
+      "img": ""
     },
     {
       "id": "5",
       "email": "teste5@gmail.com",
       "name": "Teste5",
       "password": "12345",
-      "level": 5
+      "level": 5,
+      "img": "https://media-gru2-1.cdn.whatsapp.net/v/t61.24694-24/436363297_818210166907305_1542087175055048044_n.jpg?ccb=11-4&oh=01_Q5AaIPSWZf-2FQYz-kNfLaXG6AgoQUFdFbXC43byZ-CBgFWq&oe=669D8F50&_nc_sid=e6ed6c&_nc_cat=109"
     },
     {
       "id": "6",
@@ -67,13 +70,6 @@
       "id": "188873",
       "email": "TesteFinal@gmail.com",
       "name": "TesteFinal",
-      "password": "12345",
-      "level": 5
-    },
-    {
-      "id": "929029",
-      "email": "demonstracao@gamil.com",
-      "name": "Demontracao",
       "password": "12345",
       "level": 5
     }
